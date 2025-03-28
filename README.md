@@ -1,4 +1,4 @@
-# ReduceMemory
+# ReduceMemory - Windows
 The function of this utility is to reduce “Ram Usage” on Windows devices, without damaging running files/programs! (same as ReduceMemory Ghost Spectre).
 Fungsi dari utility ini adalah untuk mengurangi "Ram Usage" pada device windows, tanpa merusak file/program yang sedang berjalan! (sama seperti ReduceMemory Ghost Spectre).
 
