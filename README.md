@@ -58,8 +58,3 @@ VII. Note
 
 Contact Me:
 instagram: @atmeg_
-
-Support Atmeg:
-BTC : 1K2JuYZASYx1bTJhDpyb57m9i5bQ67iFez
-ETH : 0x35723F7EcB6c6a4757E82a7100789e674fcE6A21
-SOL : DdFq6E3AU3JxzddsMo2q6pckjPhsjG7RaWBnyP4CKc4s
