@@ -45,6 +45,8 @@ V. HOW TO USE? | ENGLISH
 2. On Windows 11, right-click on the desktop, then select "Show More Options", choose ReduceMemory, and run it as Administrator. If a "UAC" pop-up appears, select Yes.
 3. Wait and check the results in Task Manager.
 
+https://github.com/user-attachments/assets/564456e3-04e5-4e38-b57a-73445ae69529
+
 VI. Credits
 
 EmptyStandbyList - Github @stefanpejcic
