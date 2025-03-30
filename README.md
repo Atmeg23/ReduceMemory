@@ -33,12 +33,24 @@ III. HOW TO INSTALL | ENGLISH
 - Example: "C:\Users\User\Downloads\reduce memory atmeg.bat"
 9. Done! Enjoy
 
-IV. Credits
+IV. CARA PAKE | BAHASA
+
+1. Pada Windows 10 kebawah, klik kanan pada desktop lalu pilih ReduceMemory dan jalankan sebagai Administrator. Atau jika muncul pop up "UAC" maka pilih Yes.
+2. Pada Windows 11, klik kanan pada desktop lalu pilih "Show More Option", pilih ReduceMemory dan jalankan sebagai Administrator. Jika muncul pop up "UAC" maka pilih Yes.
+3. Tunggu dan lihat hasilnya di Task Manager.
+
+V. HOW TO USE? | ENGLISH
+
+1. On Windows 10 and earlier, right-click on the desktop, then select ReduceMemory and run it as Administrator. If a "UAC" pop-up appears, select Yes.
+2. On Windows 11, right-click on the desktop, then select "Show More Options", choose ReduceMemory, and run it as Administrator. If a "UAC" pop-up appears, select Yes.
+3. Wait and check the results in Task Manager.
+
+VI. Credits
 
 EmptyStandbyList - Github @stefanpejcic
 https://github.com/stefanpejcic/EmptyStandbyList
 
-V. Note
+VII. Note
 
 |Program Tested On Windows 11 23H2|
 
