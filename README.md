@@ -118,19 +118,7 @@ Removes the Scheduled Task, context menu registry entry, and `EmptyStandbyList.e
 
 **EmptyStandbyList** by [@stefanpejcic](https://github.com/stefanpejcic/EmptyStandbyList)
 
-Original script by **@atmeg_** on Instagram
-
----
-
-## Support Atmeg
-
-If this tool helped you, consider supporting the original creator:
-
-| | Address |
-|---|---|
-| **BTC** | `1K2JuYZASYx1bTJhDpyb57m9i5bQ67iFez` |
-| **ETH** | `0x35723F7EcB6c6a4757E82a7100789e674fcE6A21` |
-| **SOL** | `DdFq6E3AU3JxzddsMo2q6pckjPhsjG7RaWBnyP4CKc4s` |
+Original script by ChatGPT & Claude AI
 
 ---
 
