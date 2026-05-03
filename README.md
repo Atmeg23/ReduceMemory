@@ -1,16 +1,12 @@
-================================================================
   ReduceMemory Atmeg v2
   by Atmeg  |  improved by Claude (Anthropic)
-================================================================
 
   Utility untuk mengurangi RAM usage di Windows 10 & 11
   secara instan — tanpa popup UAC, tanpa jendela CMD,
   tanpa Disk Usage tinggi, dan tanpa merusak file/program
   yang sedang berjalan.
 
-================================================================
   STRUKTUR FILE
-================================================================
 
   ReduceMemoryAtmeg\
   ├── setup_install.bat          ← Jalankan SEKALI sebagai Admin
@@ -24,9 +20,7 @@
   ├── run_hidden.vbs             ← Menjalankan bat secara silent
   └── trigger.vbs                ← Dipanggil dari context menu
 
-================================================================
   CARA INSTALL  |  BAHASA INDONESIA
-================================================================
 
   [ SYARAT ]
   - Pastikan folder "EmptyStandbyList-master" sudah ada
@@ -45,9 +39,7 @@
 
   4. Selesai. Tidak perlu restart.
 
-================================================================
   HOW TO INSTALL  |  ENGLISH
-================================================================
 
   [ REQUIREMENTS ]
   - The "EmptyStandbyList-master" folder must exist
@@ -66,9 +58,7 @@
 
   4. Done. No restart required.
 
-================================================================
   CARA PAKAI  |  BAHASA INDONESIA
-================================================================
 
   Windows 10:
     Klik kanan di Desktop → pilih "ReduceMemory Atmeg"
@@ -81,9 +71,7 @@
   background. Cek hasilnya di Task Manager → Performance
   → Memory (tab "In Use" akan turun).
 
-================================================================
   HOW TO USE  |  ENGLISH
-================================================================
 
   Windows 10:
     Right-click on Desktop → select "ReduceMemory Atmeg"
@@ -96,9 +84,7 @@
   background. Check results in Task Manager → Performance
   → Memory (the "In Use" value will decrease).
 
-================================================================
   CARA UNINSTALL
-================================================================
 
   1. Klik kanan "uninstall.bat" → "Run as administrator"
   2. Selesai. Semua perubahan dihapus bersih:
@@ -106,9 +92,7 @@
      - Registry context menu dihapus
      - EmptyStandbyList.exe dihapus dari System32
 
-================================================================
   PENJELASAN TEKNIS
-================================================================
 
   CARA KERJA (ALUR EKSEKUSI):
 
@@ -179,17 +163,13 @@
     - Auto-detect path EmptyStandbyList.exe
     - Flush DNS cache
 
-================================================================
   KOMPATIBILITAS
-================================================================
 
   OS       : Windows 10 (semua versi) & Windows 11
   Dependensi: EmptyStandbyList.exe (by @stefanpejcic)
   Tested on: Windows 11 23H2
 
-================================================================
   CREDITS
-================================================================
 
   EmptyStandbyList
   GitHub  : github.com/stefanpejcic/EmptyStandbyList
@@ -198,4 +178,3 @@
   Original script  : ChatGPT
   v2 improvements  : Claude — Anthropic
 
-================================================================
