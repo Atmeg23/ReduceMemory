@@ -1,180 +1,139 @@
-  ReduceMemory Atmeg v2
-  by Atmeg  |  improved by Claude (Anthropic)
+<div align="center">
 
-  Utility untuk mengurangi RAM usage di Windows 10 & 11
-  secara instan — tanpa popup UAC, tanpa jendela CMD,
-  tanpa Disk Usage tinggi, dan tanpa merusak file/program
-  yang sedang berjalan.
+# ReduceMemory Atmeg
+### Silent RAM cleaner for Windows 10 & 11
 
-  STRUKTUR FILE
+Right-click your desktop. RAM drops. No UAC. No window. No disk spike.
 
-  ReduceMemoryAtmeg\
-  ├── setup_install.bat          ← Jalankan SEKALI sebagai Admin
-  ├── reduce_memory_atmeg.bat    ← Script utama (jangan run manual)
-  ├── uninstall.bat              ← Hapus semua perubahan
-  ├── readme.txt                 ← File ini
-  └── EmptyStandbyList-master\
-      └── EmptyStandbyList.exe   ← Diperlukan sebelum setup
+![Windows 10](https://img.shields.io/badge/Windows%2010-supported-0078D4?style=flat-square&logo=windows)
+![Windows 11](https://img.shields.io/badge/Windows%2011-supported-0078D4?style=flat-square&logo=windows)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
-  File berikut dibuat OTOMATIS saat setup:
-  ├── run_hidden.vbs             ← Menjalankan bat secara silent
-  └── trigger.vbs                ← Dipanggil dari context menu
+</div>
 
-  CARA INSTALL  |  BAHASA INDONESIA
+---
 
-  [ SYARAT ]
-  - Pastikan folder "EmptyStandbyList-master" sudah ada
-    di dalam folder yang sama dengan setup_install.bat
-  - User harus memiliki hak Administrator
+## What it does
 
-  [ LANGKAH ]
-  1. Klik kanan "setup_install.bat"
-     → pilih "Run as administrator"
+Clears RAM usage instantly by flushing the standby list, modified page list, and working sets — the same mechanism used by tools like Ghost Spectre's ReduceMemory. Accessible from the right-click context menu on your desktop, no UAC prompt required after setup.
 
-  2. Klik "Yes" pada popup UAC
-     (Ini SATU-SATUNYA kali UAC akan muncul)
+---
 
-  3. Tunggu hingga semua step [1/5] sampai [5/5] selesai
-     dan muncul tulisan "SETUP SELESAI!"
+## Features
 
-  4. Selesai. Tidak perlu restart.
+| | v1 — Original | v2 — Updated |
+|---|---|---|
+| Context menu shortcut | ✅ | ✅ |
+| Clears standby list | ✅ | ✅ |
+| Clears modified page list | ✅ | ✅ |
+| Clears working sets | ✅ | ✅ |
+| Deletes user temp files | ✅ | ✅ (skips files in use) |
+| Flushes DNS cache | ❌ | ✅ |
+| UAC prompt | Every use | One-time setup only |
+| CMD window on run | ✅ visible | ❌ fully hidden |
+| Disk I/O spike | ✅ pagefile reset | ❌ disk untouched |
+| Deletes Prefetch | ✅ (harmful) | ❌ removed |
+| Stops system services | ✅ (harmful) | ❌ removed |
+| Auto-detect ESL path | ❌ | ✅ |
+| Uninstaller included | ❌ | ✅ |
+| Paths with spaces | ❌ | ✅ |
 
-  HOW TO INSTALL  |  ENGLISH
+---
 
-  [ REQUIREMENTS ]
-  - The "EmptyStandbyList-master" folder must exist
-    in the same directory as setup_install.bat
-  - User must have Administrator privileges
+## How it works
 
-  [ STEPS ]
-  1. Right-click "setup_install.bat"
-     → select "Run as administrator"
+```
+Right-click desktop
+       ↓
+  trigger.vbs  →  schtasks /run  (silent, no window)
+       ↓
+  Task Scheduler  (InteractiveToken + HighestAvailable)
+       ↓
+  run_hidden.vbs  →  cmd.exe  [window = 0]
+       ↓
+  EmptyStandbyList  workingsets
+  EmptyStandbyList  modifiedpagelist
+  EmptyStandbyList  standbylist
+  Delete user temp files
+  Flush DNS cache
+```
 
-  2. Click "Yes" on the UAC prompt
-     (This is the ONLY time UAC will appear)
+**Why no UAC:** Task Scheduler registers the task with `InteractiveToken` and `HighestAvailable` — pre-authorized at setup, no prompt needed on each run.
 
-  3. Wait until all steps [1/5] through [5/5] complete
-     and "SETUP SELESAI!" message appears
+**Why no CMD window:** The context menu calls `wscript.exe` (windowless), which then runs `cmd.exe` with window parameter `0` (hidden).
 
-  4. Done. No restart required.
+**Why no disk spike:** Pagefile reset and Prefetch deletion from v1 are removed entirely. Only RAM is touched.
 
-  CARA PAKAI  |  BAHASA INDONESIA
+---
 
-  Windows 10:
-    Klik kanan di Desktop → pilih "ReduceMemory Atmeg"
+## Requirements
 
-  Windows 11:
-    Klik kanan di Desktop → "Show More Options"
-    → pilih "ReduceMemory Atmeg"
+- Windows 10 or Windows 11
+- Administrator account
+- [EmptyStandbyList](https://github.com/stefanpejcic/EmptyStandbyList) — place inside `EmptyStandbyList-master\` folder
 
-  Tidak ada popup. Tidak ada jendela. Script berjalan di
-  background. Cek hasilnya di Task Manager → Performance
-  → Memory (tab "In Use" akan turun).
+---
 
-  HOW TO USE  |  ENGLISH
+## Installation
 
-  Windows 10:
-    Right-click on Desktop → select "ReduceMemory Atmeg"
+```
+ReduceMemoryAtmeg\
+├── setup_install.bat           ← Run this once as Admin
+├── reduce_memory_atmeg.bat     ← Main script (do not run manually)
+├── uninstall.bat               ← Clean removal
+├── README.md
+└── EmptyStandbyList-master\
+    └── EmptyStandbyList.exe    ← Required before setup
+```
 
-  Windows 11:
-    Right-click on Desktop → "Show More Options"
-    → select "ReduceMemory Atmeg"
+1. Place `EmptyStandbyList.exe` inside the `EmptyStandbyList-master` folder
+2. Right-click `setup_install.bat` → **Run as administrator**
+3. Accept the UAC prompt *(only time it will appear)*
+4. Wait for all 5 steps to complete
 
-  No popup. No window. The script runs silently in the
-  background. Check results in Task Manager → Performance
-  → Memory (the "In Use" value will decrease).
+> The following files are created automatically during setup:
+> `run_hidden.vbs` and `trigger.vbs`
 
-  CARA UNINSTALL
+---
 
-  1. Klik kanan "uninstall.bat" → "Run as administrator"
-  2. Selesai. Semua perubahan dihapus bersih:
-     - Scheduled Task dihapus
-     - Registry context menu dihapus
-     - EmptyStandbyList.exe dihapus dari System32
+## Usage
 
-  PENJELASAN TEKNIS
+**Windows 10** — Right-click on Desktop → `ReduceMemory Atmeg`
 
-  CARA KERJA (ALUR EKSEKUSI):
+**Windows 11** — Right-click on Desktop → `Show More Options` → `ReduceMemory Atmeg`
 
-    Klik kanan desktop
-         ↓
-    trigger.vbs
-    (panggil schtasks /run secara silent)
-         ↓
-    Task Scheduler
-    (user session, hak admin, tanpa UAC)
-         ↓
-    run_hidden.vbs
-    (jalankan CMD dengan window = 0 / hidden)
-         ↓
-    reduce_memory_atmeg.bat
-         ↓
-    EmptyStandbyList workingsets
-    → EmptyStandbyList modifiedpagelist
-    → EmptyStandbyList standbylist
-    → Hapus file temp user
-    → Flush DNS cache
+Check results in **Task Manager → Performance → Memory** — the *In Use* value will decrease.
 
-  ----------------------------------------------------------------
+---
 
-  KENAPA TIDAK ADA UAC:
-    Task Scheduler mendaftarkan task dengan LogonType
-    "InteractiveToken" dan RunLevel "HighestAvailable".
-    Artinya task sudah pre-authorized saat setup — tidak
-    perlu konfirmasi ulang setiap dijalankan.
+## Uninstall
 
-  KENAPA TIDAK ADA JENDELA CMD:
-    Context menu memanggil wscript.exe (bukan cmd.exe).
-    wscript tidak memiliki jendela sendiri. Dari situ,
-    run_hidden.vbs menjalankan cmd.exe dengan parameter
-    window "0" (hidden).
+Right-click `uninstall.bat` → **Run as administrator**
 
-  KENAPA DISK USAGE RENDAH:
-    Versi lama melakukan reset Pagefile (tulis ulang
-    ratusan MB ke disk) dan hapus Prefetch (Windows
-    harus rebuild cache dari nol). Keduanya dihilangkan.
-    Sekarang hanya RAM yang disentuh, bukan disk.
+Removes the Scheduled Task, context menu registry entry, and `EmptyStandbyList.exe` from System32.
 
-  URUTAN ESL YANG BENAR:
-    1. workingsets   → paksa proses lepas RAM idle
-    2. modifiedpagelist → bersihkan data yang belum
-                          ditulis ke disk
-    3. standbylist   → kosongkan cache RAM
-    Urutan ini penting — workingsets harus duluan supaya
-    data yang dilepas bisa langsung diklaim ulang oleh OS.
+---
 
-  ----------------------------------------------------------------
+## Credits
 
-  PERBEDAAN DARI VERSI 1:
+**EmptyStandbyList** by [@stefanpejcic](https://github.com/stefanpejcic/EmptyStandbyList)
 
-    DIHAPUS:
-    - Reset Pagefile  (penyebab Disk Usage 100%)
-    - Hapus Prefetch  (memperlambat buka aplikasi)
-    - sc stop SysMain / WSearch / DiagTrack
-      (merusak sistem jangka panjang)
-    - PowerShell MinWorkingSet loop  (penyebab freeze)
+Original script by **@atmeg_** on Instagram
 
-    DITAMBAHKAN:
-    - setup_install.bat  (one-time setup otomatis)
-    - run_hidden.vbs  (silent execution)
-    - trigger.vbs  (pemanggil dari context menu)
-    - uninstall.bat  (hapus bersih semua perubahan)
-    - Jeda antar operasi ESL  (hasil lebih optimal)
-    - Auto-detect path EmptyStandbyList.exe
-    - Flush DNS cache
+---
 
-  KOMPATIBILITAS
+## Support Atmeg
 
-  OS       : Windows 10 (semua versi) & Windows 11
-  Dependensi: EmptyStandbyList.exe (by @stefanpejcic)
-  Tested on: Windows 11 23H2
+If this tool helped you, consider supporting the original creator:
 
-  CREDITS
+| | Address |
+|---|---|
+| **BTC** | `1K2JuYZASYx1bTJhDpyb57m9i5bQ67iFez` |
+| **ETH** | `0x35723F7EcB6c6a4757E82a7100789e674fcE6A21` |
+| **SOL** | `DdFq6E3AU3JxzddsMo2q6pckjPhsjG7RaWBnyP4CKc4s` |
 
-  EmptyStandbyList
-  GitHub  : github.com/stefanpejcic/EmptyStandbyList
-  Author  : @stefanpejcic
+---
 
-  Original script  : ChatGPT
-  v2 improvements  : Claude — Anthropic
-
+<div align="center">
+<sub>Tested on Windows 11 23H2</sub>
+</div>
