@@ -17,6 +17,10 @@ Right-click your desktop. RAM drops. No UAC. No window. No disk spike.
 
 Clears RAM usage instantly by flushing the standby list, modified page list, and working sets — the same mechanism used by tools like Ghost Spectre's ReduceMemory. Accessible from the right-click context menu on your desktop, no UAC prompt required after setup.
 
+https://github.com/user-attachments/assets/eac952e8-4a4b-4d2c-a05c-e2e3125fb44a
+
+
+
 ---
 
 ## Features
